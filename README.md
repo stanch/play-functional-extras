@@ -16,3 +16,11 @@ This package provides two utilities:
     (__ \ 'otherId).read[Int].map(getById)
   ).tupled.liftAll[Future]
   ```
+  
+### Getting it
+
+```scala
+resolvers += "Stanch@bintray" at "http://dl.bintray.com/stanch/maven"
+
+libraryDependencies += "org.needs" %% "play-json-applicative" % "1.0.0"
+```
