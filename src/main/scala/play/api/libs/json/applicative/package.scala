@@ -7,10 +7,6 @@ import play.api.libs.functional.{Functor, Applicative}
 package object applicative {
   import Lifting._
 
-  /** Automatically convert `Reads[A]` to `Reads[M[A]]` for Applicative M */
-  implicit def puréeingReads[M[_], A](implicit app: Applicative[M], reads: Reads[A]): Reads[M[A]] =
-    reads.map(app.pure)
-
   implicit class LiftingReads[A](reads: Reads[A]) {
     /** Convert `Reads[(P, M[Q], M[R], S, M[T])]` to `Reads[M[(P, Q, R, S, T)]]` for Applicative M */
     def liftAll[M[_]](implicit app: Applicative[M]): Reads[M[Any]] = macro liftAllImpl[M]
