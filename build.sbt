@@ -4,6 +4,8 @@ organization := "org.needs"
 
 version := "1.0.0"
 
+licenses += ("MIT", url("http://opensource.org/licenses/MIT"))
+
 scalaVersion := "2.10.3"
 
 autoCompilerPlugins := true
