@@ -1,6 +1,6 @@
 ### Applicative and functor extensions
 
-This package provides two utilities:
+This package provides two utilities (`import play.api.libs.json.applicative._` assumed):
 
 * Mapping inside `Reads[F[A]]`, where `F` is a `Functor`:
   ```scala
