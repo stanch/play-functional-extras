@@ -9,7 +9,8 @@ This package provides two utilities:
 
 * Lifting `Reads[(A, M[B], M[C], D, M[E])]` (i.e. tuples of either `X` or `M[X]`) to `Reads[M[(A, B, C, D, E)]]`:
   ```scala
-  def getById(id: Int): Future[String]
+  def getById(id: Int): Future[String] = ...
+
   val reads: Reads[Future[(Int, String)]] = (
     (__ \ 'id).read[Int] and
     (__ \ 'otherId).read[Int].map(getById)
