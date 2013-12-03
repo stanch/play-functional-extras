@@ -7,7 +7,8 @@ This package provides two utilities (`import play.api.libs.json.applicative._` a
   JsNumber(1).as(__.read[Option[Int]].fmap(_ + 42)) should equal (Some(43))
   ```
 
-* Lifting `Reads[(A, M[B], M[C], D, M[E])]` (i.e. tuples of either `X` or `M[X]`) to `Reads[M[(A, B, C, D, E)]]`:
+* Lifting `Reads[(A, M[B], M[C], D, M[E])]` (i.e. tuples of either `X` or `M[X]`) to `Reads[M[(A, B, C, D, E)]]`,
+  where `M` is an `Applicative`:
   ```scala
   def getById(id: Int): Future[String] = ...
 
