@@ -1,27 +1,36 @@
-### Applicative and functor extensions
+### Lifting
 
-This package provides two utilities (`import play.api.libs.json.applicative._` assumed):
+This package provides a very straightforward lifting operation on tuples:
 
-* Mapping inside `Reads[F[A]]`, where `F` is a `Functor`:
-  ```scala
-  JsNumber(1).as(__.read[Option[Int]].fmap(_ + 42)) should equal (Some(43))
-  ```
+```scala
+import play.api.libs.functional.syntax._
+import play.api.libs.functional.lifting._
 
-* Lifting `Reads[(A, M[B], M[C], D, M[E])]` (i.e. tuples of either `X` or `M[X]`) to `Reads[M[(A, B, C, D, E)]]`,
-  where `M` is an `Applicative`:
-  ```scala
-  def getById(id: Int): Future[String] = ...
+"Lifting" should "work for pure tuples" in {
+  (1, "foo").liftAll[Option] should equal (Some((1, "foo")))
+  (1, "foo", 3.14).liftAll[Option] should equal (Some((1, "foo", 3.14)))
+}
 
-  val reads: Reads[Future[(Int, String)]] = (
-    (__ \ 'id).read[Int] and
-    (__ \ 'otherId).read[Int].map(getById)
-  ).tupled.liftAll[Future]
-  ```
+it should "work for tuples of mixed pure and in-context values" in {
+  (Option(1), 2).liftAll[Option] should equal (Some((1, 2)))
+  ("bar", Option(2)).liftAll[Option] should equal (Some(("bar", 2)))
+  (1, Option(2), 3.5).liftAll[Option] should equal (Some((1, 2, 3.5)))
+}
+
+it should "work for tuples of in-context values" in {
+  (Option(1), Option("baz")).liftAll[Option] should equal (Some((1, "baz")))
+  (Option(1), Option(2), Option(3), Option(4)).liftAll[Option] should equal (Some((1, 2, 3, 4)))
+}
+
+it should "work when nested" in {
+  (Option(1), (Option(2), 3).liftAll[Option]).liftAll[Option] should equal (Some((1, (2, 3))))
+}
+```
   
 ### Getting it
 
 ```scala
 resolvers += "Stanch@bintray" at "http://dl.bintray.com/stanch/maven"
 
-libraryDependencies += "org.needs" %% "play-json-applicative" % "1.0.0"
+libraryDependencies += "org.needs" %% "play-functional-extras" % "1.0.0"
 ```
