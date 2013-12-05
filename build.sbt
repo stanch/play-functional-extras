@@ -1,4 +1,4 @@
-name := "play-json-applicative"
+name := "play-functional-extras"
 
 organization := "org.needs"
 
@@ -10,10 +10,7 @@ scalaVersion := "2.10.3"
 
 autoCompilerPlugins := true
 
-scalacOptions ++= Seq(
-  "-feature"//,
-  //"-Ydebug"
-)
+scalacOptions += "-feature"
 
 resolvers ++= Seq(
   Resolver.sonatypeRepo("snapshots")
@@ -25,6 +22,6 @@ libraryDependencies ++= Seq(
 )
 
 libraryDependencies ++= Seq(
-  "com.typesafe.play" %% "play-json" % "2.2.0",
+  "com.typesafe.play" %% "play-functional" % "2.2.0",
   "org.scalatest" %% "scalatest" % "2.0" % "test"
 )
