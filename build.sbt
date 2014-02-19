@@ -26,5 +26,5 @@ libraryDependencies ++= Seq(
   "com.typesafe.play" %% "play-functional" % "2.3-SNAPSHOT",
   "com.chuusai" % "shapeless" % "2.0.0-M1" cross CrossVersion.full,
   "org.scalatest" %% "scalatest" % "2.0" % "test",
-  "com.typesafe.play" %% "play-json" % "2.3-SNAPSHOT"
+  "com.typesafe.play" %% "play-json" % "2.3-SNAPSHOT" % "test"
 )
