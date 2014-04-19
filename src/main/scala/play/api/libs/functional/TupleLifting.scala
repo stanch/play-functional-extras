@@ -24,8 +24,7 @@ object TupleLifting {
       // using and from play applicative builders
       q"$x and $y"
     }
-    val res = q"{ import play.api.libs.functional.syntax._; $builder.tupled }"
-    c.macroApplication.setType(c.typeCheck(res).tpe)
+    val res = q"{ import _root_.play.api.libs.functional.syntax._; $builder.tupled }"
     c.Expr[M[Any]](res)
   }
 }
