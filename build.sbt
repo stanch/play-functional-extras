@@ -2,7 +2,7 @@ name := "play-functional-extras"
 
 organization := "org.resolvable"
 
-version := "1.0.0"
+version := "1.0.1"
 
 licenses += ("MIT", url("http://opensource.org/licenses/MIT"))
 
